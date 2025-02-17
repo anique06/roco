@@ -49,7 +49,7 @@
 
             let data = { routine, time1, time2, time3 };
 
-            fetch("http://192.168.4.1/save", {  // Change IP to match ESP32
+            fetch("http://192.168.141.33/save", {  // Change IP to match ESP32
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data)
