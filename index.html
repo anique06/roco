@@ -8,65 +8,26 @@
 </head>
 <body>
     <div class="container">
-        <h2>Medicine Reminder</h2>
-        <label for="routine">How many times do you take medicine per day?</label>
-        <select id="routine" onchange="updateTimeInputs()">
-            <option value="1">Once</option>
-            <option value="2">Twice</option>
-            <option value="3">Three times</option>
-        </select>
+        <h1>Medicine Reminder</h1>
+        <form id="medicineForm">
+            <label for="routine">How many times per day?</label>
+            <select id="routine" name="routine" onchange="showTimeInputs()">
+                <option value="" disabled selected>Select</option>
+                <option value="1">1 time</option>
+                <option value="2">2 times</option>
+                <option value="3">3 times</option>
+            </select>
 
-        <div id="timeInputs">
-            <label for="time1">Time 1:</label>
-            <input type="time" id="time1" required>
-
-            <div id="time2-container" style="display: none;">
-                <label for="time2">Time 2:</label>
-                <input type="time" id="time2">
+            <div id="timeInputs">
+                <input type="time" id="time1" name="time1" class="time-field" required>
+                <input type="time" id="time2" name="time2" class="time-field" required>
+                <input type="time" id="time3" name="time3" class="time-field" required>
             </div>
 
-            <div id="time3-container" style="display: none;">
-                <label for="time3">Time 3:</label>
-                <input type="time" id="time3">
-            </div>
-        </div>
-
-        <button onclick="submitData()">Submit</button>
+            <button type="button" onclick="submitData()">Submit</button>
+        </form>
     </div>
 
-    <script>
-        function updateTimeInputs() {
-            let routine = document.getElementById("routine").value;
-            document.getElementById("time2-container").style.display = (routine >= 2) ? "block" : "none";
-            document.getElementById("time3-container").style.display = (routine == 3) ? "block" : "none";
-        }
-
-        function submitData() {
-            let routine = document.getElementById("routine").value;
-            let time1 = document.getElementById("time1").value;
-            let time2 = document.getElementById("time2").value || "None";
-            let time3 = document.getElementById("time3").value || "None";
-
-            let data = {
-                routine: routine,
-                time1: time1,
-                time2: time2,
-                time3: time3
-            };
-
-            fetch("http://192.168.141.33/save", {  // Change IP based on ESP32 Wi-Fi settings
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.text())
-            .then(data => {
-                alert("Your data has been saved successfully!");
-                console.log("Data sent:", data);
-            })
-            .catch(error => console.error("Error:", error));
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
-
