@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Reminder</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Medicine Reminder</h2>
+        <label for="routine">How many times do you take medicine per day?</label>
+        <select id="routine" onchange="updateTimeInputs()">
+            <option value="1">Once</option>
+            <option value="2">Twice</option>
+            <option value="3">Three times</option>
+        </select>
+
+        <div id="timeInputs">
+            <label for="time1">Time 1:</label>
+            <input type="time" id="time1" required>
+
+            <div id="time2-container" style="display: none;">
+                <label for="time2">Time 2:</label>
+                <input type="time" id="time2">
+            </div>
+
+            <div id="time3-container" style="display: none;">
+                <label for="time3">Time 3:</label>
+                <input type="time" id="time3">
+            </div>
+        </div>
+
+        <button onclick="submitData()">Submit</button>
+    </div>
+
+    <script>
+        function updateTimeInputs() {
+            let routine = document.getElementById("routine").value;
+            document.getElementById("time2-container").style.display = (routine >= 2) ? "block" : "none";
+            document.getElementById("time3-container").style.display = (routine == 3) ? "block" : "none";
+        }
+
+        function submitData() {
+            let routine = document.getElementById("routine").value;
+            let time1 = document.getElementById("time1").value;
+            let time2 = document.getElementById("time2").value || "None";
+            let time3 = document.getElementById("time3").value || "None";
+
+            let data = { routine, time1, time2, time3 };
+
+            fetch("http://192.168.4.1/save", {  // Change IP to match ESP32
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert("Your data has been saved successfully!");
+                console.log("Data sent:", data);
+            })
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
+</body>
+</html>
