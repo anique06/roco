@@ -1,44 +1,56 @@
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    color: white;
     text-align: center;
-    padding: 50px;
 }
 
 .container {
-    background: white;
+    width: 90%;
+    max-width: 400px;
+    margin: 50px auto;
+    background: rgba(255, 255, 255, 0.1);
     padding: 20px;
     border-radius: 10px;
-    width: 300px;
-    margin: auto;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-h2 {
-    color: #ff5722;
+h1 {
+    font-size: 24px;
 }
 
 label {
     display: block;
-    margin: 10px 0 5px;
+    margin: 10px 0;
 }
 
 select, input, button {
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
+    margin: 5px 0;
     border-radius: 5px;
-    border: 1px solid #ddd;
+    border: none;
+    font-size: 16px;
+}
+
+select, input {
+    background: white;
+    color: black;
 }
 
 button {
-    background: #ff5722;
+    background: #ff5733;
     color: white;
-    border: none;
     cursor: pointer;
+    font-weight: bold;
 }
 
 button:hover {
     background: #e64a19;
 }
 
+.time-field {
+    display: none;
+}
