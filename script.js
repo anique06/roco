@@ -29,7 +29,7 @@ function submitData() {
     alert("Your data has been saved successfully!");
 
     // Send data to ESP32
-    let esp32_url = `http://192.168.4.1/save?routine=${routine}&time1=${time1}&time2=${time2}&time3=${time3}`;
+    let esp32_url = `http://192.168.141.33/save?routine=${routine}&time1=${time1}&time2=${time2}&time3=${time3}`;
     fetch(esp32_url)
         .then(response => console.log("Data sent to ESP32"))
         .catch(error => console.error("Error:", error));
